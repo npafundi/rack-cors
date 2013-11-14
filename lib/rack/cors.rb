@@ -43,6 +43,7 @@ module Rack
         if env['REQUEST_METHOD'] == 'OPTIONS'
           debug env, "CORS TEST 2"
           debug env, env.to_s
+          debug env, "CORS TEST 3"
           if headers = process_preflight(env)
             debug(env) do
               "Preflight Headers:\n" +
@@ -51,7 +52,7 @@ module Rack
             return [200, headers, []]
           end
         else
-          debug env, "CORS TEST 3"
+          debug env, "CORS TEST 4"
           return [200, headers, []]
         end
       end

@@ -39,11 +39,8 @@ module Rack
             "  Access-Control-Request-Headers: #{env['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}"
             ].join("\n")
         end
-        debug env, "CORS TEST 1"
         if env['REQUEST_METHOD'] == 'OPTIONS'
-          debug env, "CORS TEST 2"
           if headers = process_preflight(env)
-            debug env, "CORS TEST 3"
             debug(env) do
               "Preflight Headers:\n" +
                   headers.collect{|kv| "  #{kv.join(': ')}"}.join("\n")
@@ -51,7 +48,6 @@ module Rack
             return [200, headers, []]
           end
         else
-          debug env, "CORS TEST 4"
           return [200, headers, []]
         end
       end
@@ -70,10 +66,12 @@ module Rack
 
     protected
       def debug(env, message = nil, &block)
-        logger = @logger || env['rack.logger'] || begin
-          @logger = ::Logger.new(STDOUT).tap {|logger| logger.level = ::Logger::Severity::INFO}
+        if @debug_mode
+          logger = @logger || env['rack.logger'] || begin
+            @logger = ::Logger.new(STDOUT).tap {|logger| logger.level = ::Logger::Severity::INFO}
+          end
+          logger.debug(message, &block)
         end
-        logger.debug(message, &block)
       end
 
       def all_resources

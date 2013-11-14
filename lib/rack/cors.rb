@@ -69,12 +69,10 @@ module Rack
 
     protected
       def debug(env, message = nil, &block)
-        if @debug_mode
-          logger = @logger || env['rack.logger'] || begin
-            @logger = ::Logger.new(STDOUT).tap {|logger| logger.level = ::Logger::Severity::INFO}
-          end
-          logger.debug(message, &block)
+        logger = @logger || env['rack.logger'] || begin
+          @logger = ::Logger.new(STDOUT).tap {|logger| logger.level = ::Logger::Severity::INFO}
         end
+        logger.debug(message, &block)
       end
 
       def all_resources

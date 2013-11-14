@@ -42,9 +42,9 @@ module Rack
         debug env, "CORS TEST 1"
         if env['REQUEST_METHOD'] == 'OPTIONS'
           debug env, "CORS TEST 2"
-          debug env, env.to_s
           debug env, "CORS TEST 3"
           if headers = process_preflight(env)
+            debug env, "CORS TEST 3.5"
             debug(env) do
               "Preflight Headers:\n" +
                   headers.collect{|kv| "  #{kv.join(': ')}"}.join("\n")

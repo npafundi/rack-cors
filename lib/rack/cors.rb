@@ -39,7 +39,9 @@ module Rack
             "  Access-Control-Request-Headers: #{env['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}"
             ].join("\n")
         end
+        Rails.logger.debug "CORS - TESTING 1"
         if env['REQUEST_METHOD'] == 'OPTIONS' and env['HTTP_ACCESS_CONTROL_REQUEST_METHOD']
+          Rails.logger.debug "CORS - TESTING 2"
           if headers = process_preflight(env)
             debug(env) do
               "Preflight Headers:\n" +
@@ -48,6 +50,7 @@ module Rack
             return [200, headers, []]
           end
         else
+          Rails.logger.debug "CORS - TESTING 3"
           cors_headers = process_cors(env)
         end
       end

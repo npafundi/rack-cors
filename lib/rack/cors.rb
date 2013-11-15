@@ -40,6 +40,7 @@ module Rack
             ].join("\n")
         end
         debug env, "npafundi/rack-cors-1"
+        debug env, env.to_s
         if env['REQUEST_METHOD'] == 'OPTIONS'
           debug env, "npafundi/rack-cors-2"
           if headers = process_preflight(env)

@@ -41,7 +41,7 @@ module Rack
         end
         debug env, "npafundi/rack-cors-1"
         debug env, env.to_s
-        if env['REQUEST_METHOD'] == 'OPTIONS'
+        if env['REQUEST_METHOD'] == 'OPTIONS' and env['HTTP_ACCESS_CONTROL_REQUEST_METHOD']
           debug env, "npafundi/rack-cors-2"
           debug env, process_preflight(env).to_s
           debug env, "npafundi/rack-cors-2.5"
@@ -55,7 +55,8 @@ module Rack
           end
         else
           debug env, "npafundi/rack-cors-4"
-          return [200, headers, []]
+          cors_headers = process_cors(env)
+          debug env, "npafundi/rack-cors-4"
         end
       end
       status, headers, body = @app.call env

@@ -45,6 +45,8 @@ module Rack
           debug env, "npafundi/rack-cors-2"
           debug env, process_preflight(env).to_s
           debug env, "npafundi/rack-cors-2.5"
+          debug env, headers
+          debug env, "npafundi/rack-cors-2.7"
           if headers = process_preflight(env)
             debug env, "npafundi/rack-cors-3"
             debug(env) do

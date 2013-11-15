@@ -39,6 +39,7 @@ module Rack
             "  Access-Control-Request-Headers: #{env['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}"
             ].join("\n")
         end
+        debug env, "npafundi/rack-cors-1"
         if env['REQUEST_METHOD'] == 'OPTIONS'
           if headers = process_preflight(env)
             debug(env) do

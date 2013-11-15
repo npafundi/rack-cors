@@ -85,6 +85,7 @@ module Rack
 
       def process_preflight(env)
         resource = find_resource(env['HTTP_ORIGIN'], env['PATH_INFO'],env)
+        debug env, resource.to_s
         resource && resource.process_preflight(env)
       end
 

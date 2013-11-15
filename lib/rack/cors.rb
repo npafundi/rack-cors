@@ -41,7 +41,9 @@ module Rack
         end
         debug env, "npafundi/rack-cors-1"
         if env['REQUEST_METHOD'] == 'OPTIONS'
+          debug env, "npafundi/rack-cors-2"
           if headers = process_preflight(env)
+            debug env, "npafundi/rack-cors-3"
             debug(env) do
               "Preflight Headers:\n" +
                   headers.collect{|kv| "  #{kv.join(': ')}"}.join("\n")
@@ -49,6 +51,7 @@ module Rack
             return [200, headers, []]
           end
         else
+          debug env, "npafundi/rack-cors-4"
           return [200, headers, []]
         end
       end

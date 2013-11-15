@@ -56,7 +56,8 @@ module Rack
         else
           debug env, "npafundi/rack-cors-4"
           cors_headers = process_cors(env)
-          debug env, "npafundi/rack-cors-4"
+          debug env, cors_headers.to_s
+          debug env, "npafundi/rack-cors-5"
         end
       end
       status, headers, body = @app.call env

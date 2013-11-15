@@ -4,7 +4,7 @@ module Rack
   class Cors
     def initialize(app, opts={}, &block)
       @app = app
-      @logger = opts[:logger]
+      @logger = Rails.logger
       @debug_mode = !!opts[:debug]
 
       if block_given?
